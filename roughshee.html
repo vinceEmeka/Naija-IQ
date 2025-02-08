@@ -1,0 +1,17 @@
+<ul id="user-list"></ul>
+
+<script>
+  const users = [
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 },
+    { name: "Charlie", age: 22 }
+  ];
+
+  const list = document.getElementById("user-list");
+
+  users.forEach(user => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${user.name} - ${user.age} years old`;
+    list.appendChild(listItem);
+  });
+</script>

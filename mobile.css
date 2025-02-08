@@ -1,6 +1,7 @@
 /* RESPONSIVE ===================================== */
 @media (max-width: 800px) {
-  body {
+  main {
+    width: 100%;
   }
   .header {
     display: flex;
@@ -48,7 +49,7 @@
   .quiz-parts {
     /* border: 1px solid red; */
     padding: 1rem 2rem;
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 

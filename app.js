@@ -58,7 +58,7 @@ const quizData = [
  },
  {
   question: "Which Nigerian musician is known as the 'African Giant'?",
-  options: ["Wixkid", "Burna Boy", "Davido", "Olamide"],
+  options: ["Wizkid", "Burna Boy", "Davido", "Olamide"],
   answer: "Burna Boy"
  }
 ]
@@ -69,9 +69,11 @@ const playerName = document.getElementById("player");
 const startGameBtn = document.querySelector(".start");
 const previousBtn = document.querySelector(".previous-btn");
 const questionProgress = document.querySelector(".progress");
-const question = document.querySelector(".current-question");
+const currentQuestion = document.querySelector(".current-question");
 const quizCard = document.querySelector(".quiz-card");
-const options = document.querySelectorall(".option");
+const quizOptions = document.querySelector(".quiz-options");
+const optionText = document.querySelectorAll(".option-text");
+const optionDiv = document.querySelectorAll(".option")
 const nextBtn = document.querySelector(".next");
 const finalScore = document.querySelector(".final-score-text");
 const resetBtn = document.querySelector(".reset");
@@ -80,22 +82,42 @@ const homeBtn = document.querySelector(".home");
 // Quiz State
 
 let currentQuestionIndex = 0;
-let score = 0;
+// let score = 0;
+
 
 
 // Function to display a question
-function displayQuestion() {
- if (currentQuestionIndex < quizData.length) {
-  const questionObj = quizData[currentQuestionIndex];
+const displayQuestion = () => {
+ let questionObj = quizData[currentQuestionIndex];
+ currentQuestion.textContent = questionObj.question;
 
-  console.log(`Q${currentQuestionIndex + 1}: ${questionObj.question}`);
-  questionObj.options.forEach((option, index) => {
-   console.log(`${index + 1}. ${option}`);
-  });
- } else {
-  console.log("Quiz completed!");
- }
+ questionObj.options.forEach((option, index) => {
+  if (optionText[index]) {
+   optionText[index].textContent = option;
+  }
+ });
+
 }
+
+displayQuestion();
+
+//CHECK CORRECT ANSWER
+optionDiv.forEach(option => {
+ option.addEventListener("click", function () {
+  alert("clicked")
+ })
+});
+
+// NEXT BTN FUNCTIONALITY
+
+nextBtn.addEventListener("click", () => {
+ if (currentQuestionIndex < quizData.length - 1) {
+  currentQuestionIndex++;
+  displayQuestion();
+ } else {
+  alert("GAME OVER")
+ }
+})
 
 //Store the playersName
 // startGameBtn.addEventListener("click", (e) => {
