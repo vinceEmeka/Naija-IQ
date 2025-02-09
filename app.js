@@ -70,19 +70,21 @@ const startGameBtn = document.querySelector(".start");
 const previousBtn = document.querySelector(".previous-btn");
 const questionProgress = document.querySelector(".progress");
 const currentQuestion = document.querySelector(".current-question");
-const quizCard = document.querySelector(".quiz-card");
+// const quizCard = document.querySelector(".quiz-card");
 const quizOptions = document.querySelector(".quiz-options");
 const optionText = document.querySelectorAll(".option-text");
+const optionsTest = document.getElementById("options-test")
 const optionDiv = document.querySelectorAll(".option")
 const nextBtn = document.querySelector(".next");
 const finalScore = document.querySelector(".final-score-text");
 const resetBtn = document.querySelector(".reset");
 const homeBtn = document.querySelector(".home");
 
-// Quiz State
 
+// Quiz State
 let currentQuestionIndex = 0;
-// let score = 0;
+let score = 0;
+let selected = false;
 
 
 
@@ -90,25 +92,41 @@ let currentQuestionIndex = 0;
 const displayQuestion = () => {
  let questionObj = quizData[currentQuestionIndex];
  currentQuestion.textContent = questionObj.question;
+ let questionNo = currentQuestionIndex + 1;
 
+ //track the question progress
+ questionProgress.textContent = `Question ${questionNo} of ${quizData.length}`
+
+
+
+ // display the Options
  questionObj.options.forEach((option, index) => {
   if (optionText[index]) {
    optionText[index].textContent = option;
   }
  });
 
+
+
+ // Event listener for option selection (Attach once!)
+ quizOptions.addEventListener("click", (e) => {
+  if (e.target.classList.contains("option-text")) {
+   if (selected) return; // Prevent multiple selections
+   selected = true;
+   const selectedOption = e.target.textContent.trim();
+   const correctAnswer = quizData[currentQuestionIndex].answer.trim();
+
+   if (selectedOption === correctAnswer) {
+    console.log("Correct!!! 🎉");
+   } else {
+    console.log("Wrong! ❌");
+   }
+
+   nextBtn.style.display = "block"
+  }
+ });
 }
 
-displayQuestion();
-
-//CHECK CORRECT ANSWER
-optionDiv.forEach(option => {
- option.addEventListener("click", function () {
-  alert("clicked")
- })
-});
-
-// NEXT BTN FUNCTIONALITY
 
 nextBtn.addEventListener("click", () => {
  if (currentQuestionIndex < quizData.length - 1) {
@@ -118,6 +136,12 @@ nextBtn.addEventListener("click", () => {
   alert("GAME OVER")
  }
 })
+
+displayQuestion();
+
+
+
+
 
 //Store the playersName
 // startGameBtn.addEventListener("click", (e) => {

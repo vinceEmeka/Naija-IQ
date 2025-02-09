@@ -135,6 +135,12 @@ input {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option:hover {
+  background-color: #2d2d2d;
+  color: white;
 }
 
 .option input {
@@ -147,9 +153,18 @@ input {
   padding-left: 1rem;
 }
 
+.correct {
+  background-color: var(--correct-color);
+}
+
+.wrong {
+  background-color: var(--wrong-color);
+}
+
 .next {
   margin: 2rem auto;
-  width: 50%;
+  width: 150px;
+  display: none;
 }
 
 /* ================================Score PAGE STYLE  */
